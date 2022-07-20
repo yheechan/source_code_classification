@@ -474,6 +474,10 @@
 ../data/code25/markdown/28417406.txt	 : 2
 ../data/code25/markdown/37108857.txt	 : 22
 ../data/code25/markdown/40416494.txt	 : 2
+../data/code25/markdown/34710815.txt	 : 1
+../data/code25/markdown/45211394.txt	 : 2
+../data/code25/markdown/37355233.txt	 : 2
+../data/code25/markdown/28100927.txt	 : 2
 ../data/code25/php/1756862.txt	 : 3
 ../data/code25/php/1160860.txt	 : 2
 ../data/code25/php/1074532.txt	 : 6
@@ -642,6 +646,7 @@
 ../data/code25/c++/1766544.txt	 : 8
 ../data/code25/c++/2172053.txt	 : 4
 ../data/code25/c++/1558208.txt	 : 6
+../data/code25/c++/2215250.txt	 : 12
 ../data/code25/scala/16806544.txt	 : 1
 ../data/code25/scala/10854047.txt	 : 4
 ../data/code25/scala/7050011.txt	 : 225
