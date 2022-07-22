@@ -1,6 +1,5 @@
 import torch.nn as nn
 
-
 class RNNClassifier(nn.Module):
 
     def __init__(
