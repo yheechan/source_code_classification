@@ -91,11 +91,11 @@ def train(device,
             time_elapsed = time.time() - t0_epoch
             print(f"{epoch_i + 1:^7} | {avg_train_loss:^12.6f} | {val_loss:^10.6f} | {val_accuracy:^9.2f} | {time_elapsed:^9.2f}")
 
-        writer.add_scalars(title + '-CNN Training vs. Testing Loss',
+        writer.add_scalars(title + '-Loss',
                 { 'Train' : avg_train_loss, 'Test' : val_loss },
                 epoch_i + 1)
 
-        writer.add_scalars(title + '-CNN Training vs. Testing Accuracy',
+        writer.add_scalars(title + '-Accuracy',
                     { 'Train' : train_accuracy, 'Test' : val_accuracy },
                     epoch_i + 1)
             

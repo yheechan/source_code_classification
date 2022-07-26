@@ -33,7 +33,7 @@ class RNNClassifier(nn.Module):
         self.generator = nn.Linear(hidden_size * 2, n_classes)
         
         # We use LogSoftmax + NLLLoss instead of Softmax + CrossEntropy
-        self.activation = nn.LogSoftmax(dim=-1)
+        # self.activation = nn.LogSoftmax(dim=-1)
 
     def forward(self, x):
         # |x| = (batch_size, length)
@@ -43,7 +43,9 @@ class RNNClassifier(nn.Module):
         x, _ = self.rnn(x)
         
         # |x| = (batch_size, length, hidden_size * 2)
-        y = self.activation(self.generator(x[:, -1]))
+        # y = self.activation(self.generator(x[:, -1]))
         # |y| = (batch_size, n_classes)
+
+        y = self.generator(x[:, -1])
 
         return y
