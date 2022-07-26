@@ -14,7 +14,9 @@ def initilize_model(device=None,
                     learning_rate=0.01,
                     optimizerName="Adadelta",
                     mome=0.8,
-                    modelType="CNN"):
+                    modelType="CNN",
+                    n_layers=4,
+                    hidden_size=100):
     """Instantiate a CNN model and an optimizer."""
 
     assert (len(filter_sizes) == len(num_filters)), "filter_sizes and \
@@ -29,11 +31,15 @@ def initilize_model(device=None,
                             filter_sizes=filter_sizes,
                             num_filters=num_filters,
                             num_classes=num_classes,
-                            dropout=0.5)
+                            dropout=dropout)
     
     elif modelType=="RNN":
         model = rnn.RNNClassifier(vocab_size,
                                   embed_dim,
+                                  hidden_size,
+                                  num_classes,
+                                  n_layers,
+                                  dropout
                                   )
     
     # Send model to `device` (GPU/CPU)
