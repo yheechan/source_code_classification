@@ -9,7 +9,7 @@ class RNNClassifier(nn.Module):
         hidden_size,
         n_classes,
         n_layers=4,
-        dropout_p=.3,
+        dropout_p=0.3,
     ):
         self.input_size = input_size  # vocabulary_size
         self.word_vec_size = word_vec_size

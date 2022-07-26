@@ -49,10 +49,10 @@ def get_df():
                             
                             if chars.isascii():
                                 
-                                if char_cnt != 512:
+                                if char_cnt != 248:
                                     char_cnt += 1
                                     data_124 += chars
-                                elif char_cnt == 512:
+                                elif char_cnt == 248:
                                     char_cnt = 0
                                     class_txt_cnt += 1
                                     data_list.append(data_124)
