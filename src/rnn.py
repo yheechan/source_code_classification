@@ -30,7 +30,8 @@ class RNNClassifier(nn.Module):
             bidirectional=True,
         )
 
-        self.generator = nn.Linear(hidden_size * 2, n_classes)
+        self.fc = nn.Linear(hidden_size * 2, n_classes)
+        self.dropout = nn.Dropout(dropout_p)
         
         # We use LogSoftmax + NLLLoss instead of Softmax + CrossEntropy
         # self.activation = nn.LogSoftmax(dim=-1)
@@ -43,9 +44,10 @@ class RNNClassifier(nn.Module):
         x, _ = self.rnn(x)
         
         # |x| = (batch_size, length, hidden_size * 2)
-        # y = self.activation(self.generator(x[:, -1]))
+        # y = self.activation(self.fc(x[:, -1]))
         # |y| = (batch_size, n_classes)
 
-        y = self.generator(x[:, -1])
+        # y = self.fc(x[:, -1])
+        y = self.fc(self.dropout(x[:, -1]))
 
         return y
