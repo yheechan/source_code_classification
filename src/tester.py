@@ -32,10 +32,7 @@ def test(device, model, test_dataloader):
     
     fin_loss = np.mean(tot_loss)
     fin_acc = (tot_pred == tot_label).cpu().numpy().mean() * 100
-
-    print(tot_pred.shape)
-    print(tot_label.shape)
-
+    
     print('test loss: ', fin_loss)
     print('test acc: ', fin_acc)
 
