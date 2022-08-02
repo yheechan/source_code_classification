@@ -54,7 +54,7 @@ class CNN_NLP(nn.Module):
         ])
         # Fully-connected layer and Dropout
         self.fc = nn.Linear(np.sum(num_filters), num_classes)
-        self.dropout = nn.Dropout(p=dropout)
+        self.dropout = nn.Drcdopout(p=dropout)
 
     def forward(self, input_ids):
         """Perform a forward pass through the network.
