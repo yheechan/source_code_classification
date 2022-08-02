@@ -1,4 +1,5 @@
 import torch.nn as nn
+import torch.nn.functional as F
 
 class RNNClassifier(nn.Module):
 
@@ -30,7 +31,11 @@ class RNNClassifier(nn.Module):
             bidirectional=True,
         )
 
-        self.fc = nn.Linear(hidden_size * 2, n_classes)
+        self.fc1 = nn.Linear(hidden_size * 2, 300)
+        # self.fc2 = nn.Linear(300, 300)
+        # self.fc3 = nn.Linear(300, 300)
+        self.fc4 = nn.Linear(300, n_classes)
+
         self.dropout = nn.Dropout(dropout_p)
         
         # We use LogSoftmax + NLLLoss instead of Softmax + CrossEntropy
@@ -48,6 +53,9 @@ class RNNClassifier(nn.Module):
         # |y| = (batch_size, n_classes)
 
         # y = self.fc(x[:, -1])
-        y = self.fc(self.dropout(x[:, -1]))
+        y = self.fc1(self.dropout(x[:, -1]))
+        # y = self.fc2(F.relu(y))
+        # y = self.fc3(F.relu(y))
+        y = self.fc4(F.relu(y))
 
         return y
