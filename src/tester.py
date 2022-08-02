@@ -36,3 +36,5 @@ def test(device, model, test_dataloader):
     print('test loss: ', fin_loss)
     print('test acc: ', fin_acc)
 
+    return tot_pred, tot_label
+
