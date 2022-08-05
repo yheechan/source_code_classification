@@ -39,7 +39,8 @@ def initilize_model(device=None,
                                   hidden_size,
                                   num_classes,
                                   n_layers,
-                                  dropout
+                                  dropout,
+                                  pretrained_embedding=pretrained_embedding,
                                   )
     
     # Send model to `device` (GPU/CPU)

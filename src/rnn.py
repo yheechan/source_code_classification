@@ -11,6 +11,8 @@ class RNNClassifier(nn.Module):
         n_classes,
         n_layers=4,
         dropout_p=0.3,
+        pretrained_embedding=None,
+        freeze_embedding=False,
     ):
         self.input_size = input_size  # vocabulary_size
         self.word_vec_size = word_vec_size
@@ -21,9 +23,19 @@ class RNNClassifier(nn.Module):
 
         super().__init__()
 
-        self.emb = nn.Embedding(input_size, word_vec_size)
+        if pretrained_embedding is not None:
+            print("doing with pretrained model!!!")
+            self.input_size, self.word_vec_size = pretrained_embedding.shape
+            self.emb = nn.Embedding.from_pretrained(pretrained_embedding,
+                                                    freeze=freeze_embedding)
+        else:
+            print("doing without pretrained model!!!")
+            self.word_vec_size = word_vec_size
+            self.emb = nn.Embedding(input_size, word_vec_size)
+        
+        # self.emb = nn.Embedding(input_size, word_vec_size)
         self.rnn = nn.LSTM(
-            input_size=word_vec_size,
+            input_size=self.word_vec_size,
             hidden_size=hidden_size,
             num_layers=n_layers,
             dropout=dropout_p,
@@ -43,7 +55,7 @@ class RNNClassifier(nn.Module):
 
     def forward(self, x):
         # |x| = (batch_size, length)
-        x = self.emb(x)
+        x = self.emb(x).float()
 
         # |x| = (batch_size, length, word_vec_size)
         x, _ = self.rnn(x)
@@ -54,8 +66,8 @@ class RNNClassifier(nn.Module):
 
         # y = self.fc(x[:, -1])
         y = self.fc1(self.dropout(x[:, -1]))
-        # y = self.fc2(F.relu(y))
-        # y = self.fc3(F.relu(y))
-        y = self.fc4(F.relu(y))
+        # y = self.fc2(self.dropout(F.relu(y)))
+        # y = self.fc3(self.dropout(F.relu(y)))
+        y = self.fc4(self.dropout(F.relu(y)))
 
         return y
